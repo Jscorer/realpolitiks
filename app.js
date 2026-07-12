@@ -16,7 +16,7 @@ var OPTS = [
   {v:-1,   t:'Strongly Disagree'}
 ];
 
-var IW = [1.3,1.2,1.1,1,1,0.8,0.8];   // ideology axis weights: eq,lb,dm,pr,gl,sc,ec
+var IW = [1.2,1.15,1.1,1,1,0.7,0.75,0.85,0.85,0.9,0.9,0.85,1,0.8]; // ideology axis weights, AXES order
 var PW = [1.3,1,1];                    // party axis weights: eq,lb,pr
 
 var S = { code:null, name:null, tier:null, n:0, questions:[], answers:[], idx:0 };
@@ -161,11 +161,11 @@ function computeAxes(){
   AXES.forEach(function(a){ var o=acc[a.id]; pct[a.id]= o.max>0 ? Math.round(100*(o.max+o.s)/(2*o.max)) : 50; });
   return pct;
 }
-function fingerprint(p){ return [p.econ,p.civil,p.dmcy,p.scty,p.dipl,p.reln,p.ecol]; }
+function fingerprint(p){ return [p.econ,p.civil,p.dmcy,p.scty,p.dipl,p.state,p.ecol,p.reln,p.tact,p.mil,p.prop,p.welf,p.imm,p.just]; }
 function rankIdeologies(fp){
-  var maxD=0; for(var k=0;k<7;k++)maxD+=IW[k]*IW[k]*10000; maxD=Math.sqrt(maxD);
+  var maxD=0; for(var k=0;k<IW.length;k++)maxD+=IW[k]*IW[k]*10000; maxD=Math.sqrt(maxD);
   return IDEOLOGIES.map(function(id){
-    var s=0; for(var i=0;i<7;i++){var d=(fp[i]-id.c[i])*IW[i]; s+=d*d;}
+    var s=0; for(var i=0;i<IW.length;i++){var d=(fp[i]-id.c[i])*IW[i]; s+=d*d;}
     return {n:id.n,d:id.d,s:id.s,match:Math.max(0,Math.round(100*(1-Math.sqrt(s)/maxD)))};
   }).sort(function(a,b){return b.match-a.match;});
 }
@@ -218,14 +218,13 @@ function renderCompass(pct){
   var x=pad + (100-pct.econ)/100*span;   // econ high = left
   var y=pad + (pct.civil)/100*span;      // civil low (authority) = top
   var svg='<svg viewBox="0 0 '+size+' '+size+'">'+
-    '<defs><radialGradient id="dg" cx="50%" cy="50%" r="60%"><stop offset="0%" stop-color="#eef0fe"/><stop offset="100%" stop-color="#f9fafe"/></radialGradient></defs>'+
-    '<rect x="'+pad+'" y="'+pad+'" width="'+span+'" height="'+span+'" rx="14" fill="url(#dg)" stroke="#e2e5f0"/>'+
+    '<rect x="'+pad+'" y="'+pad+'" width="'+span+'" height="'+span+'" rx="14" style="fill:var(--compass-board);stroke:var(--compass-stroke)"/>'+
     '<rect x="'+pad+'" y="'+pad+'" width="'+span/2+'" height="'+span/2+'" fill="#f5484812"/>'+
     '<rect x="'+(pad+span/2)+'" y="'+pad+'" width="'+span/2+'" height="'+span/2+'" fill="#4f46e510"/>'+
     '<rect x="'+pad+'" y="'+(pad+span/2)+'" width="'+span/2+'" height="'+span/2+'" fill="#16a34a10"/>'+
     '<rect x="'+(pad+span/2)+'" y="'+(pad+span/2)+'" width="'+span/2+'" height="'+span/2+'" fill="#eab30814"/>'+
-    '<line x1="'+(size/2)+'" y1="'+pad+'" x2="'+(size/2)+'" y2="'+(size-pad)+'" stroke="#c7cbe0" stroke-width="1"/>'+
-    '<line x1="'+pad+'" y1="'+(size/2)+'" x2="'+(size-pad)+'" y2="'+(size/2)+'" stroke="#c7cbe0" stroke-width="1"/>'+
+    '<line x1="'+(size/2)+'" y1="'+pad+'" x2="'+(size/2)+'" y2="'+(size-pad)+'" style="stroke:var(--compass-grid)" stroke-width="1"/>'+
+    '<line x1="'+pad+'" y1="'+(size/2)+'" x2="'+(size-pad)+'" y2="'+(size/2)+'" style="stroke:var(--compass-grid)" stroke-width="1"/>'+
     '<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="11" fill="#4f46e5" stroke="#fff" stroke-width="3"/>'+
     '<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="20" fill="#4f46e5" opacity="0.14"/>'+
     '</svg>'+
@@ -264,9 +263,16 @@ function renderAxes(pct){
   });
 }
 
+/* ---------- theme ---------- */
+function applyTheme(t){ document.documentElement.setAttribute('data-theme',t); var ic=$('theme-ic'),lbl=$('theme-lbl'); if(ic)ic.textContent=t==='dark'?'\u2600\ufe0f':'\ud83c\udf19'; if(lbl)lbl.textContent=t==='dark'?'Light':'Dark'; }
+function initTheme(){ var t=document.documentElement.getAttribute('data-theme'); if(!t){ try{t=localStorage.getItem('rp-theme');}catch(e){} if(!t)t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'; } applyTheme(t); }
+function toggleTheme(){ var cur=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'; applyTheme(cur); try{localStorage.setItem('rp-theme',cur);}catch(e){} }
+
 /* ---------- wiring ---------- */
 function wire(){
   initHome();
+  initTheme();
+  var tt=$('theme-toggle'); if(tt) tt.onclick=toggleTheme;
   $('btn-start').onclick=function(){ renderCountries(''); show('country'); };
   $('btn-restart').onclick=function(){ show('home'); };
   var backs=document.querySelectorAll('[data-go]');

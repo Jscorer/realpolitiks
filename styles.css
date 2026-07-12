@@ -5,6 +5,8 @@
   --pos:#16a34a; --neg:#dc2626; --neutral:#94a3b8;
   --shadow:0 1px 2px rgba(16,19,34,.04),0 10px 30px rgba(16,19,34,.06);
   --radius:18px;
+  --navbg:rgba(246,247,251,.82);
+  --compass-board:#f4f5fd; --compass-stroke:#e2e5f0; --compass-grid:#c7cbe0;
   --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,'Noto Sans','Noto Color Emoji','Apple Color Emoji','Segoe UI Emoji',sans-serif;
 }
 *{box-sizing:border-box}
@@ -13,7 +15,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1
 a{color:var(--accent);text-decoration:none}
 
 /* header */
-.nav{position:sticky;top:0;z-index:30;background:rgba(246,247,251,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.nav{position:sticky;top:0;z-index:30;background:var(--navbg);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
 .nav-in{max-width:960px;margin:0 auto;padding:16px 22px;display:flex;align-items:center;gap:10px;}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.02em;font-size:18px}
 .brand .dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 0 0 4px var(--accentSoft)}
@@ -163,3 +165,31 @@ a{color:var(--accent);text-decoration:none}
   .runners{grid-template-columns:1fr}
   .qtext{font-size:22px}
 }
+
+
+/* ===================== color themes ===================== */
+.theme-toggle{display:inline-flex;align-items:center;gap:7px;background:var(--panel);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:8px 13px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);transition:border-color .12s,transform .1s;}
+.theme-toggle:hover{border-color:var(--accent);}
+.theme-toggle:active{transform:translateY(1px);}
+.theme-toggle #theme-ic{font-size:15px;line-height:1;}
+
+html[data-theme="dark"]{
+  --bg:#0e1016; --panel:#171a22; --ink:#eceef4; --muted:#9aa3b4; --faint:#69707f;
+  --line:#262b36; --line2:#20242e; --accentSoft:#211f3d;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 30px rgba(0,0,0,.38);
+  --navbg:rgba(14,16,22,.82);
+  --compass-board:#12151d; --compass-stroke:#282d39; --compass-grid:#343a49;
+}
+html[data-theme="dark"] .hero h1 .grad,
+html[data-theme="dark"] .stat .num{filter:brightness(1.18) saturate(1.1);}
+html[data-theme="dark"] .disclaimer{background:#141821;border-color:var(--line);}
+html[data-theme="dark"] .qbadge{background:#241d3d;}
+html[data-theme="dark"] .axis-track{background:linear-gradient(90deg,#242833,#2c313d);}
+html[data-theme="dark"] .axis-track .mid{background:#3a4050;}
+html[data-theme="dark"] .progress{background:#242833;}
+html[data-theme="dark"] .pbar{background:#242833;}
+html[data-theme="dark"] .party:not(.top) .pbar .pf{background:#3a4050;}
+html[data-theme="dark"] .search{background:var(--panel);color:var(--ink);}
+html[data-theme="dark"] .search::placeholder{color:var(--faint);}
+html[data-theme="dark"] .opt.sel .rd{box-shadow:inset 0 0 0 3px var(--panel);}
+html[data-theme="dark"] .axis-marker{background:var(--panel);}

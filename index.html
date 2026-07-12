@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script>(function(){try{var t=localStorage.getItem('rp-theme');if(!t)t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 </head>
 <body>
 
@@ -14,7 +15,7 @@
   <div class="nav-in">
     <div class="brand"><span class="dot"></span>realpolitiks<span class="tag">Political Test</span></div>
     <div class="spacer"></div>
-    <div class="mini" id="nav-mini"></div>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle color theme"><span id="theme-ic">🌙</span><span id="theme-lbl">Dark</span></button>
   </div>
 </nav>
 
