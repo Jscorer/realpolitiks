@@ -168,10 +168,13 @@ a{color:var(--accent);text-decoration:none}
 
 
 /* ===================== color themes ===================== */
-.theme-toggle{display:inline-flex;align-items:center;gap:7px;background:var(--panel);border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:8px 13px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;box-shadow:var(--shadow);transition:border-color .12s,transform .1s;}
-.theme-toggle:hover{border-color:var(--accent);}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;background:var(--panel);border:1px solid var(--line);color:var(--muted);border-radius:12px;padding:0;cursor:pointer;box-shadow:var(--shadow);transition:color .15s,border-color .15s,background .15s,transform .08s;}
+.theme-toggle:hover{color:var(--accent);border-color:var(--accent);}
 .theme-toggle:active{transform:translateY(1px);}
-.theme-toggle #theme-ic{font-size:15px;line-height:1;}
+.theme-toggle svg{width:18px;height:18px;display:block;}
+.theme-toggle .ic-sun{display:none;}
+html[data-theme="dark"] .theme-toggle .ic-moon{display:none;}
+html[data-theme="dark"] .theme-toggle .ic-sun{display:block;}
 
 html[data-theme="dark"]{
   --bg:#0e1016; --panel:#171a22; --ink:#eceef4; --muted:#9aa3b4; --faint:#69707f;

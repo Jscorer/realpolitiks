@@ -264,15 +264,15 @@ function renderAxes(pct){
 }
 
 /* ---------- theme ---------- */
-function applyTheme(t){ document.documentElement.setAttribute('data-theme',t); var ic=$('theme-ic'),lbl=$('theme-lbl'); if(ic)ic.textContent=t==='dark'?'\u2600\ufe0f':'\ud83c\udf19'; if(lbl)lbl.textContent=t==='dark'?'Light':'Dark'; }
+function applyTheme(t){ document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light'); }
 function initTheme(){ var t=document.documentElement.getAttribute('data-theme'); if(!t){ try{t=localStorage.getItem('rp-theme');}catch(e){} if(!t)t=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'; } applyTheme(t); }
 function toggleTheme(){ var cur=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark'; applyTheme(cur); try{localStorage.setItem('rp-theme',cur);}catch(e){} }
 
 /* ---------- wiring ---------- */
 function wire(){
-  initHome();
   initTheme();
-  var tt=$('theme-toggle'); if(tt) tt.onclick=toggleTheme;
+  var tt=$('theme-toggle'); if(tt) tt.addEventListener('click',toggleTheme);
+  initHome();
   $('btn-start').onclick=function(){ renderCountries(''); show('country'); };
   $('btn-restart').onclick=function(){ show('home'); };
   var backs=document.querySelectorAll('[data-go]');
