@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>realpolitiks — The In-Depth Political Test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-in">
+    <div class="brand"><span class="dot"></span>realpolitiks<span class="tag">Political Test</span></div>
+    <div class="spacer"></div>
+    <div class="mini" id="nav-mini"></div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- HOME -->
+  <section class="screen active" id="screen-home">
+    <div class="hero">
+      <span class="eyebrow">The most in-depth political test</span>
+      <h1>Discover your true<br><span class="grad">political identity</span></h1>
+      <p>Answer carefully crafted questions across 14 value axes to find the ideology you match, your position on the political compass, and the party you align with in your country.</p>
+      <button class="btn btn-primary" id="btn-start">Start the test →</button>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="num" id="stat-ideologies">—</div><div class="lbl">Ideologies matched</div></div>
+      <div class="stat"><div class="num" id="stat-axes">—</div><div class="lbl">Value axes</div></div>
+      <div class="stat"><div class="num" id="stat-questions">—</div><div class="lbl">Questions in the bank</div></div>
+      <div class="stat"><div class="num" id="stat-countries">—</div><div class="lbl">Countries</div></div>
+    </div>
+
+    <div class="features">
+      <div class="feature"><div class="ic">🧭</div><h3>Political compass</h3><p>See exactly where you land on the economic left–right and libertarian–authoritarian axes.</p></div>
+      <div class="feature"><div class="ic">📊</div><h3>14-axis value profile</h3><p>A detailed breakdown of your views — from economics and democracy to ecology and justice.</p></div>
+      <div class="feature"><div class="ic">🏳️</div><h3>Ideology match</h3><p>Matched against 48 ideologies, from social democracy to anarchism, monarchism and more.</p></div>
+      <div class="feature"><div class="ic">🗳️</div><h3>Party alignment</h3><p>Find which real party in your country best fits your answers, with tailored questions for many nations.</p></div>
+    </div>
+  </section>
+
+  <!-- COUNTRY -->
+  <section class="screen" id="screen-country">
+    <div class="head">
+      <button class="back" data-go="home">← Back</button>
+      <h2>Where are you from?</h2>
+      <p>Countries marked <em>Tailored</em> include questions about their own parties, leaders and political events. Everyone else gets the full general test.</p>
+    </div>
+    <input class="search" id="country-search" placeholder="Search for your country…" autocomplete="off">
+    <div id="country-groups"></div>
+  </section>
+
+  <!-- MODE -->
+  <section class="screen" id="screen-mode">
+    <div class="head">
+      <button class="back" data-go="country">← Change country</button>
+      <h2>Choose your depth</h2>
+      <p>A longer test asks about more of your values, producing a sharper and more accurate result.</p>
+    </div>
+    <div class="mode-country" id="mode-country"></div>
+    <div class="modewrap" id="mode-cards"></div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="screen" id="screen-quiz">
+    <div class="quizbar">
+      <span id="quiz-counter">Question 1</span>
+      <span class="cty" id="quiz-country"></span>
+    </div>
+    <div class="progress"><div class="fill" id="quiz-fill"></div></div>
+    <div class="qcard">
+      <div><span class="qnum" id="quiz-qnum">01</span><span class="qbadge" id="quiz-badge" style="display:none">Your country</span></div>
+      <div class="qtext" id="quiz-question">…</div>
+      <div class="opts" id="quiz-opts"></div>
+      <div class="qnav">
+        <button class="back" id="quiz-back">← Back</button>
+        <button class="back" id="quiz-skip">Skip / Neutral →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section class="screen" id="screen-results">
+    <div class="res-hero">
+      <div class="k">Your closest ideology</div>
+      <h2 id="res-name">—</h2>
+      <div class="match" id="res-match">—</div>
+      <div class="desc" id="res-desc"></div>
+    </div>
+
+    <div class="card">
+      <h3>Other close matches</h3>
+      <p class="sub">The next ideologies your answers resemble.</p>
+      <div class="runners" id="res-runners"></div>
+    </div>
+
+    <div class="card">
+      <h3>Your political compass</h3>
+      <p class="sub">Economic axis (left–right) against the social axis (libertarian–authoritarian).</p>
+      <div class="compass-wrap">
+        <div class="compass" id="res-compass"></div>
+        <div class="compass-sum" id="res-compass-sum"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Party alignment</h3>
+      <p class="sub" id="res-party-sub">How closely you match the main parties.</p>
+      <div id="res-parties"></div>
+    </div>
+
+    <div class="card">
+      <h3>Your 14-axis value profile</h3>
+      <p class="sub">Where your answers place you on every value dimension.</p>
+      <div id="res-axes"></div>
+    </div>
+
+    <div class="disclaimer" id="res-note"></div>
+    <div class="center" style="margin:26px 0 10px"><button class="btn btn-primary" id="btn-restart">Take the test again</button></div>
+  </section>
+
+</main>
+
+<div class="footer">realpolitiks · An educational political test. Results are an approximation of your views, not a definitive label. Ideologies across the entire spectrum are included for completeness and understanding, not endorsement.</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
