@@ -144,6 +144,18 @@ a{color:var(--accent);text-decoration:none}
 .pbar .pf{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
 .party:not(.top) .pbar .pf{background:#c7cbe0}
 
+/* figures */
+.figure{margin:12px 0}
+.figure .frow{display:flex;align-items:center;gap:9px;font-size:14px;margin-bottom:5px}
+.figure .ffl{font-size:18px;line-height:1;flex:none}
+.figure .fn{font-weight:600;flex:1;min-width:0}
+.figure.top .fn{color:var(--accent)}
+.figure .fn .fhist{font-size:11px;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:.03em}
+.figure .fr{color:var(--faint);font-size:12.5px;flex:none;max-width:42%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.figure .fp{font-weight:800;color:var(--accent);flex:none;margin-left:6px}
+.figure:not(.top) .pbar .pf{background:#c7cbe0}
+.fig-note{font-size:12px;color:var(--muted);margin-top:12px;padding-top:11px;border-top:1px dashed var(--line)}
+
 /* axes */
 .axis{margin:16px 0}
 .axis-top{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;margin-bottom:7px}
@@ -192,6 +204,8 @@ html[data-theme="dark"] .axis-track .mid{background:#3a4050;}
 html[data-theme="dark"] .progress{background:#242833;}
 html[data-theme="dark"] .pbar{background:#242833;}
 html[data-theme="dark"] .party:not(.top) .pbar .pf{background:#3a4050;}
+html[data-theme="dark"] .figure:not(.top) .pbar .pf{background:#3a4050;}
+html[data-theme="dark"] .fig-note{border-color:var(--line);}
 html[data-theme="dark"] .search{background:var(--panel);color:var(--ink);}
 html[data-theme="dark"] .search::placeholder{color:var(--faint);}
 html[data-theme="dark"] .opt.sel .rd{box-shadow:inset 0 0 0 3px var(--panel);}

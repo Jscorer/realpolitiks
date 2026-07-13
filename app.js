@@ -65,6 +65,15 @@ function renderCountries(filter){
   }
   grid(tailored,'Tailored question sets',true);
   grid(others, filter?'Other countries':'All other countries (general test)',false);
+  if(!filter){
+    host.appendChild(el('div','grid-label','Not listed?'));
+    var og=el('div','cgrid');
+    var ob=el('button','country');
+    ob.innerHTML='<span class="fl">\uD83C\uDF10</span><span class="nm">My country isn\u2019t listed</span>';
+    ob.onclick=function(){ pickCountry({c:'XX',n:'Other / Not listed'}); };
+    og.appendChild(ob);
+    host.appendChild(og);
+  }
   if(!tailored.length && !others.length) host.appendChild(el('p','center',' No countries match \u201c'+esc(filter)+'\u201d.'));
 }
 function pickCountry(c){ S.code=c.c; S.name=c.n; renderMode(); show('mode'); }
@@ -178,6 +187,13 @@ function rankParties(p){
     return {n:pa.n,match:Math.max(0,Math.round(100*(1-Math.sqrt(s)/maxD)))};
   }).sort(function(a,b){return b.match-a.match;});
 }
+function rankFigures(fp){
+  var maxD=0; for(var k=0;k<IW.length;k++)maxD+=IW[k]*IW[k]*10000; maxD=Math.sqrt(maxD);
+  return FIGURES.map(function(f){
+    var s=0; for(var i=0;i<IW.length;i++){var d=(fp[i]-f.c[i])*IW[i]; s+=d*d;}
+    return {n:f.n,r:f.r,cc:f.cc,flag:flagOf(f.cc),s:f.s,match:Math.max(0,Math.round(100*(1-Math.sqrt(s)/maxD)))};
+  }).sort(function(a,b){return b.match-a.match;});
+}
 
 /* ---------- results ---------- */
 function finish(){
@@ -201,6 +217,7 @@ function finish(){
 
   renderCompass(pct);
   renderParties(parties);
+  renderFigures(rankFigures(fp));
   renderAxes(pct);
 
   var note='This test covers ideologies from across the entire political spectrum for the sake of completeness and understanding. Inclusion is never an endorsement.';
@@ -246,6 +263,22 @@ function renderParties(parties){
       '<div class="pbar"><div class="pf" style="width:'+p.match+'%"></div></div>';
     host.appendChild(row);
   });
+}
+
+function renderFigures(figs){
+  var host=$('res-figures'); host.innerHTML='';
+  var anyHist=false;
+  figs.slice(0,10).forEach(function(f,i){
+    if(f.s)anyHist=true;
+    var row=el('div','figure'+(i===0?' top':''));
+    row.innerHTML='<div class="frow"><span class="ffl">'+f.flag+'</span>'+
+      '<span class="fn">'+(i===0?'\u2b50 ':'')+esc(f.n)+(f.s?' <span class="fhist">\u2022 historical</span>':'')+'</span>'+
+      '<span class="fr">'+esc(f.r)+'</span>'+
+      '<span class="fp">'+f.match+'%</span></div>'+
+      '<div class="pbar"><div class="pf" style="width:'+f.match+'%"></div></div>';
+    host.appendChild(row);
+  });
+  var note=$('res-figures-note'); if(note) note.style.display=anyHist?'block':'none';
 }
 
 function renderAxes(pct){

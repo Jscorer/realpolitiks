@@ -127,6 +127,8 @@ const GENERAL = [
   {t:'Marriage, family and morality should follow religious teaching.',ax:'reln',m:-1},
   {t:'People are perfectly capable of being moral without religion.',ax:'reln',m:1},
   {t:'The nation\u2019s laws should be based on religious commandments.',ax:'reln',m:-1},
+  {t:'Religious law should be the main foundation of the legal system.',ax:'reln',m:-1},
+  {t:'Religious authorities should hold formal power in government.',ax:'reln',m:-1},
   // tact
   {t:'Change should happen gradually through existing institutions.',ax:'tact',m:1},
   {t:'The current system is broken and must be replaced entirely.',ax:'tact',m:-1},
@@ -488,6 +490,11 @@ const IDEOLOGIES = [
   {n:'Theocracy',c:[46,10,10,8,30,35,36,3,45,25,42,50,30,18],d:'Government founded on religious law and clerical authority, where faith directly governs public life.'},
   {n:'Religious Fundamentalism',c:[48,10,10,5,26,40,38,2,40,25,44,50,26,15],d:'Insists that strict religious doctrine should shape law, morality and the structure of the state.'},
   {n:'Christian Nationalism',c:[36,20,30,10,20,45,30,8,45,22,34,42,18,22],d:'Fuses national identity with a dominant Christian religious character enforced through the state.'},
+  {n:'Islamism',c:[55,7,14,6,16,32,32,3,28,22,46,60,14,10],d:'Political Islam seeking to order the state, law and society according to Islamic principles and sharia.'},
+  {n:'Islamic Democracy',c:[56,42,62,26,42,46,46,12,60,46,48,60,42,32],d:'Combines representative democracy with Islamic values, accepting elections and pluralism within a religious framework.'},
+  {n:'Hindu Nationalism (Hindutva)',c:[42,26,44,12,10,38,32,10,50,26,34,45,10,22],d:'An Indian nationalism that defines the nation through Hindu culture, identity and civilisation.'},
+  {n:'Religious Socialism',c:[82,56,74,46,60,55,64,26,52,62,74,86,60,55],d:'Holds that religious ethics demand social justice, uniting faith with collective ownership and a strong welfare state.'},
+  {n:'Clerical Fascism',c:[40,6,6,10,12,20,30,7,26,10,40,50,10,9],s:1,d:'Fuses fascist dictatorship with religious authority, using faith to sanctify an authoritarian state. Listed for historical understanding, not endorsement.'},
   {n:'Falangism',c:[42,10,10,18,15,25,30,12,30,10,40,50,12,15],s:1,d:'An authoritarian nationalist movement blending corporatism, traditional religion and a single-party state.'},
   {n:'Fascism',c:[35,5,4,22,8,15,30,45,25,5,35,45,8,8],s:1,d:'A dictatorial, ultranationalist ideology built on a one-party state, suppression of dissent and militarism. Listed for historical understanding, not endorsement.'},
   {n:'National Socialism',c:[35,3,3,14,4,12,30,42,20,3,35,48,3,4],s:1,d:'The racist, totalitarian ideology of Nazi Germany, combining ultranationalism, dictatorship and genocidal racial doctrine. Listed for historical understanding, not endorsement.'},
@@ -573,6 +580,526 @@ const PARTIES = {
     {n:'Social Democrats',c:[70,64,76]},
     {n:'People Before Profit',c:[90,60,82]}
   ],
+  IT: [
+    {n:'Brothers of Italy',c:[34,30,18]},
+    {n:'Democratic Party',c:[64,58,68]},
+    {n:'Five Star Movement',c:[66,52,60]},
+    {n:'Lega',c:[34,28,16]},
+    {n:'Forza Italia',c:[36,46,36]},
+    {n:'Greens and Left Alliance',c:[82,64,84]}
+  ],
+  ES: [
+    {n:'PSOE (Socialists)',c:[64,58,68]},
+    {n:'People\u2019s Party (PP)',c:[36,44,34]},
+    {n:'Vox',c:[32,26,14]},
+    {n:'Sumar / Podemos',c:[86,60,80]},
+    {n:'ERC (Catalan Left)',c:[72,62,74]},
+    {n:'PNV (Basque Nationalists)',c:[44,50,46]}
+  ],
+  PT: [
+    {n:'Socialist Party (PS)',c:[64,58,68]},
+    {n:'Social Democratic Party (PSD)',c:[42,50,44]},
+    {n:'Chega',c:[34,26,14]},
+    {n:'Left Bloc',c:[88,60,82]},
+    {n:'CDU (Communists\u2013Greens)',c:[90,48,72]},
+    {n:'Liberal Initiative',c:[24,80,58]}
+  ],
+  NL: [
+    {n:'VVD (Liberals)',c:[34,60,55]},
+    {n:'PVV (Freedom Party)',c:[36,28,16]},
+    {n:'GreenLeft\u2013Labour',c:[74,64,82]},
+    {n:'D66',c:[46,70,72]},
+    {n:'CDA (Christian Democrats)',c:[44,48,42]},
+    {n:'Party for the Animals',c:[82,66,88]}
+  ],
+  BE: [
+    {n:'PS (Socialists)',c:[72,56,70]},
+    {n:'N-VA (Flemish Nationalists)',c:[36,42,30]},
+    {n:'Vlaams Belang',c:[34,24,14]},
+    {n:'Open VLD (Liberals)',c:[34,62,58]},
+    {n:'CD&V (Christian Democrats)',c:[46,48,42]},
+    {n:'Ecolo\u2013Groen (Greens)',c:[78,66,86]},
+    {n:'PVDA\u2013PTB (Workers)',c:[90,50,74]}
+  ],
+  SE: [
+    {n:'Social Democrats',c:[66,58,70]},
+    {n:'Moderates',c:[32,52,44]},
+    {n:'Sweden Democrats',c:[36,28,16]},
+    {n:'Left Party',c:[86,60,80]},
+    {n:'Centre Party',c:[46,58,58]},
+    {n:'Greens',c:[78,66,86]}
+  ],
+  NO: [
+    {n:'Labour Party',c:[66,58,70]},
+    {n:'Conservative Party',c:[32,54,46]},
+    {n:'Progress Party',c:[30,36,20]},
+    {n:'Socialist Left',c:[84,62,80]},
+    {n:'Centre Party',c:[48,50,48]},
+    {n:'Greens',c:[78,66,86]}
+  ],
+  DK: [
+    {n:'Social Democrats',c:[62,54,66]},
+    {n:'Venstre (Liberals)',c:[32,58,50]},
+    {n:'Denmark Democrats',c:[36,30,18]},
+    {n:'Red\u2013Green Alliance',c:[90,60,82]},
+    {n:'Conservative People\u2019s Party',c:[36,46,38]},
+    {n:'Socialist People\u2019s Party',c:[80,62,80]}
+  ],
+  FI: [
+    {n:'Social Democrats (SDP)',c:[64,58,70]},
+    {n:'National Coalition',c:[30,56,48]},
+    {n:'Finns Party',c:[34,28,16]},
+    {n:'Centre Party',c:[46,52,48]},
+    {n:'Left Alliance',c:[86,60,80]},
+    {n:'Greens',c:[78,66,86]}
+  ],
+  PL: [
+    {n:'Law and Justice (PiS)',c:[46,26,16]},
+    {n:'Civic Coalition (KO)',c:[40,58,58]},
+    {n:'The Left (Lewica)',c:[72,58,74]},
+    {n:'Third Way',c:[44,48,42]},
+    {n:'Confederation',c:[24,40,14]}
+  ],
+  AT: [
+    {n:'SP\u00d6 (Social Democrats)',c:[66,58,70]},
+    {n:'\u00d6VP (People\u2019s Party)',c:[40,44,38]},
+    {n:'FP\u00d6 (Freedom Party)',c:[34,28,14]},
+    {n:'Greens',c:[78,66,86]},
+    {n:'NEOS (Liberals)',c:[32,66,62]}
+  ],
+  CH: [
+    {n:'Swiss People\u2019s Party (SVP)',c:[34,36,20]},
+    {n:'Social Democrats',c:[70,58,72]},
+    {n:'FDP.The Liberals',c:[30,62,54]},
+    {n:'The Centre',c:[44,50,44]},
+    {n:'Greens',c:[78,66,86]},
+    {n:'Green Liberals',c:[46,64,66]}
+  ],
+  GR: [
+    {n:'New Democracy',c:[34,44,34]},
+    {n:'SYRIZA',c:[80,58,74]},
+    {n:'PASOK',c:[62,56,66]},
+    {n:'KKE (Communists)',c:[92,42,66]},
+    {n:'Greek Solution',c:[34,26,14]}
+  ],
+  CZ: [
+    {n:'ANO',c:[46,44,38]},
+    {n:'ODS (Civic Democrats)',c:[30,54,46]},
+    {n:'Pirates',c:[50,72,74]},
+    {n:'SPD (Freedom & Direct Democracy)',c:[36,28,14]},
+    {n:'Communist Party',c:[88,42,64]},
+    {n:'Mayors (STAN)',c:[44,54,52]}
+  ],
+  HU: [
+    {n:'Fidesz',c:[40,26,16]},
+    {n:'TISZA',c:[44,54,52]},
+    {n:'Democratic Coalition (DK)',c:[56,58,64]},
+    {n:'Momentum',c:[46,64,66]},
+    {n:'Jobbik',c:[40,34,20]},
+    {n:'Socialists (MSZP)',c:[66,56,66]}
+  ],
+  RO: [
+    {n:'PSD (Social Democrats)',c:[60,46,44]},
+    {n:'PNL (Liberals)',c:[38,54,48]},
+    {n:'USR (Save Romania)',c:[40,64,66]},
+    {n:'AUR (Nationalists)',c:[40,28,14]},
+    {n:'UDMR (Hungarian Union)',c:[46,48,44]}
+  ],
+  UA: [
+    {n:'Servant of the People',c:[46,58,60]},
+    {n:'European Solidarity',c:[38,50,46]},
+    {n:'Batkivshchyna',c:[54,50,52]},
+    {n:'Holos (Voice)',c:[40,64,62]},
+    {n:'Opposition Platform',c:[50,36,30]}
+  ],
+  RU: [
+    {n:'United Russia',c:[38,18,26]},
+    {n:'Communist Party (KPRF)',c:[82,36,50]},
+    {n:'LDPR',c:[34,26,16]},
+    {n:'A Just Russia',c:[64,42,52]},
+    {n:'Yabloko (liberal opposition)',c:[46,70,70]}
+  ],
+  TR: [
+    {n:'AKP (Justice & Development)',c:[46,26,20]},
+    {n:'CHP (Republican People\u2019s)',c:[56,58,62]},
+    {n:'MHP (Nationalists)',c:[36,26,14]},
+    {n:'\u0130Y\u0130 (Good Party)',c:[40,44,42]},
+    {n:'DEM (pro-Kurdish left)',c:[80,58,76]},
+    {n:'Saadet (Islamist)',c:[50,24,12]}
+  ],
+  JP: [
+    {n:'Liberal Democratic Party (LDP)',c:[36,40,32]},
+    {n:'Constitutional Democratic Party',c:[58,58,64]},
+    {n:'Komeito',c:[48,44,42]},
+    {n:'Japan Innovation (Ishin)',c:[34,54,48]},
+    {n:'Japanese Communist Party',c:[86,52,72]},
+    {n:'Democratic Party for the People',c:[46,52,52]}
+  ],
+  KR: [
+    {n:'Democratic Party',c:[58,58,64]},
+    {n:'People Power Party',c:[34,42,34]},
+    {n:'Rebuilding Korea Party',c:[60,56,64]},
+    {n:'Justice Party',c:[82,60,78]}
+  ],
+  CN: [
+    {n:'Communist Party of China',c:[58,10,24]},
+    {n:'Maoist / Old Left',c:[88,18,40]},
+    {n:'Liberal reformers',c:[40,66,64]}
+  ],
+  BR: [
+    {n:'Workers\u2019 Party (PT)',c:[76,58,74]},
+    {n:'Liberal Party (PL)',c:[28,28,16]},
+    {n:'PSDB (Social Democracy)',c:[42,52,50]},
+    {n:'MDB',c:[46,46,42]},
+    {n:'PSOL',c:[88,62,82]},
+    {n:'Novo (Libertarian)',c:[20,74,54]}
+  ],
+  MX: [
+    {n:'Morena',c:[70,48,60]},
+    {n:'PAN (National Action)',c:[34,44,32]},
+    {n:'PRI',c:[46,42,42]},
+    {n:'Citizens\u2019 Movement (MC)',c:[48,60,62]},
+    {n:'PRD',c:[62,54,62]}
+  ],
+  AR: [
+    {n:'La Libertad Avanza (Milei)',c:[16,72,50]},
+    {n:'Union for the Homeland (Peronist)',c:[72,44,56]},
+    {n:'Republican Proposal (PRO)',c:[32,50,44]},
+    {n:'Radical Civic Union (UCR)',c:[44,54,52]},
+    {n:'Left Front (FIT)',c:[92,54,74]}
+  ],
+  CL: [
+    {n:'Socialist Party',c:[72,56,68]},
+    {n:'Communist Party',c:[90,46,70]},
+    {n:'Broad Front (Frente Amplio)',c:[80,62,80]},
+    {n:'National Renewal (RN)',c:[32,48,42]},
+    {n:'UDI (Conservatives)',c:[30,38,26]},
+    {n:'Republican Party',c:[28,28,14]}
+  ],
+  CO: [
+    {n:'Historic Pact (Petro)',c:[78,56,72]},
+    {n:'Democratic Center (Uribe)',c:[28,32,20]},
+    {n:'Liberal Party',c:[48,52,50]},
+    {n:'Conservative Party',c:[36,40,28]},
+    {n:'Green Alliance',c:[66,62,74]}
+  ],
+  ZA: [
+    {n:'African National Congress (ANC)',c:[64,52,60]},
+    {n:'Democratic Alliance (DA)',c:[34,62,56]},
+    {n:'Economic Freedom Fighters (EFF)',c:[92,46,72]},
+    {n:'uMkhonto weSizwe (MK)',c:[58,36,40]},
+    {n:'Inkatha Freedom Party',c:[40,42,34]}
+  ],
+  NG: [
+    {n:'All Progressives Congress (APC)',c:[42,40,32]},
+    {n:'Peoples Democratic Party (PDP)',c:[46,44,38]},
+    {n:'Labour Party',c:[58,54,58]},
+    {n:'NNPP',c:[46,44,40]}
+  ],
+  EG: [
+    {n:'Pro-government bloc',c:[40,20,28]},
+    {n:'Muslim Brotherhood tradition',c:[46,22,12]},
+    {n:'Wafd (Liberals)',c:[42,52,48]},
+    {n:'Social Democratic Party',c:[62,54,60]}
+  ],
+  SA: [
+    {n:'Ruling establishment (monarchy)',c:[40,12,16]},
+    {n:'Reformist modernisers',c:[36,50,52]},
+    {n:'Islamic conservatives',c:[48,14,8]}
+  ],
+  AE: [
+    {n:'Federal monarchy establishment',c:[38,18,20]},
+    {n:'Liberal modernisers',c:[34,54,54]},
+    {n:'Islamic conservatives',c:[48,16,10]}
+  ],
+  IL: [
+    {n:'Likud',c:[34,40,30]},
+    {n:'Yesh Atid (Centrist)',c:[44,60,60]},
+    {n:'Labor',c:[64,58,68]},
+    {n:'Religious Zionism',c:[40,20,10]},
+    {n:'Shas (Religious)',c:[52,26,14]},
+    {n:'Meretz (Left)',c:[78,64,82]}
+  ],
+  PK: [
+    {n:'PTI (Movement for Justice)',c:[48,44,38]},
+    {n:'PML-N',c:[40,40,30]},
+    {n:'Pakistan People\u2019s Party',c:[64,50,56]},
+    {n:'Jamaat-e-Islami (Islamist)',c:[46,20,10]},
+    {n:'MQM',c:[46,44,42]}
+  ],
+  BD: [
+    {n:'Awami League',c:[52,38,46]},
+    {n:'Bangladesh Nationalist Party (BNP)',c:[42,42,34]},
+    {n:'Jatiya Party',c:[44,40,36]},
+    {n:'Jamaat-e-Islami (Islamist)',c:[46,20,10]}
+  ],
+  ID: [
+    {n:'PDI-P',c:[58,50,56]},
+    {n:'Golkar',c:[42,44,40]},
+    {n:'Gerindra',c:[40,34,26]},
+    {n:'PKS (Islamist)',c:[46,26,12]},
+    {n:'NasDem',c:[46,50,48]},
+    {n:'PKB',c:[50,44,38]}
+  ],
+  PH: [
+    {n:'PDP\u2013Laban',c:[40,36,30]},
+    {n:'Liberal Party',c:[48,58,58]},
+    {n:'Nacionalista',c:[40,42,36]},
+    {n:'Makabayan (Left)',c:[82,56,74]},
+    {n:'Lakas\u2013CMD',c:[40,42,36]}
+  ],
+  TH: [
+    {n:'People\u2019s Party (Move Forward)',c:[58,66,74]},
+    {n:'Pheu Thai',c:[58,48,56]},
+    {n:'Bhumjaithai',c:[42,42,38]},
+    {n:'Democrat Party',c:[38,48,44]},
+    {n:'Palang Pracharath',c:[36,28,22]}
+  ],
+  VN: [
+    {n:'Communist Party of Vietnam',c:[58,14,30]},
+    {n:'Reformist wing',c:[46,50,54]},
+    {n:'Conservative wing',c:[64,16,26]}
+  ],
+  SG: [
+    {n:'People\u2019s Action Party (PAP)',c:[40,36,40]},
+    {n:'Workers\u2019 Party',c:[56,54,58]},
+    {n:'Progress Singapore Party',c:[42,46,46]}
+  ],
+  MY: [
+    {n:'Pakatan Harapan',c:[54,56,60]},
+    {n:'Barisan Nasional (UMNO)',c:[42,40,32]},
+    {n:'Perikatan Nasional (PAS)',c:[44,26,12]},
+    {n:'DAP',c:[58,58,66]}
+  ],
+  IR: [
+    {n:'Reformists',c:[50,42,48]},
+    {n:'Moderates',c:[46,38,42]},
+    {n:'Principlists (Conservatives)',c:[46,18,12]},
+    {n:'Hardliners',c:[44,12,8]}
+  ],
+  IQ: [
+    {n:'State of Law (Shia)',c:[50,32,30]},
+    {n:'Sadrist Movement',c:[56,32,26]},
+    {n:'Sunni coalition',c:[42,36,28]},
+    {n:'Kurdistan Democratic Party',c:[42,44,40]},
+    {n:'Patriotic Union of Kurdistan',c:[52,46,46]}
+  ],
+  TW: [
+    {n:'Democratic Progressive Party (DPP)',c:[50,62,68]},
+    {n:'Kuomintang (KMT)',c:[40,44,36]},
+    {n:'Taiwan People\u2019s Party (TPP)',c:[44,54,54]}
+  ],
+  PE: [
+    {n:'Free Peru (Left)',c:[78,50,64]},
+    {n:'Popular Force (Fujimori)',c:[30,34,22]},
+    {n:'Popular Renewal',c:[30,34,20]},
+    {n:'Together for Peru',c:[72,56,70]}
+  ],
+  VE: [
+    {n:'PSUV (Chavista)',c:[82,26,50]},
+    {n:'Democratic opposition (PUD)',c:[38,54,52]},
+    {n:'Vente Venezuela (Machado)',c:[26,60,52]}
+  ],
+  CU: [
+    {n:'Communist Party of Cuba',c:[82,16,44]},
+    {n:'Democratic opposition',c:[42,64,60]}
+  ],
+  BO: [
+    {n:'MAS (Movement for Socialism)',c:[82,48,64]},
+    {n:'Civic Community',c:[36,52,48]},
+    {n:'Creemos (Conservatives)',c:[30,36,24]}
+  ],
+  UY: [
+    {n:'Broad Front (Frente Amplio)',c:[72,58,72]},
+    {n:'National Party (Blancos)',c:[36,48,42]},
+    {n:'Colorado Party',c:[40,50,46]}
+  ],
+  EC: [
+    {n:'Citizen Revolution',c:[74,48,62]},
+    {n:'Social Christian right',c:[30,40,26]},
+    {n:'Liberal / Centrist',c:[40,54,52]}
+  ],
+  GT: [
+    {n:'Movimiento Semilla (Progressive)',c:[58,58,66]},
+    {n:'Vamos (Conservative)',c:[32,38,26]},
+    {n:'UNE',c:[48,44,42]}
+  ],
+  CR: [
+    {n:'National Liberation (PLN)',c:[46,52,52]},
+    {n:'Progressive tradition (PAC)',c:[58,58,66]},
+    {n:'Social Christian Unity',c:[40,44,36]},
+    {n:'Broad Front (Frente Amplio)',c:[78,58,76]}
+  ],
+  IS: [
+    {n:'Independence Party',c:[32,54,48]},
+    {n:'Left-Green Movement',c:[82,64,82]},
+    {n:'Social Democratic Alliance',c:[64,58,70]},
+    {n:'Progressive Party',c:[46,48,46]},
+    {n:'Pirate Party',c:[54,72,76]}
+  ],
+  LU: [
+    {n:'CSV (Christian Social)',c:[44,48,42]},
+    {n:'LSAP (Socialists)',c:[64,58,70]},
+    {n:'DP (Liberals)',c:[34,62,58]},
+    {n:'The Greens',c:[78,66,86]}
+  ],
+  EE: [
+    {n:'Reform Party',c:[30,62,56]},
+    {n:'Centre Party',c:[56,46,48]},
+    {n:'EKRE (Nationalists)',c:[36,28,14]},
+    {n:'Estonia 200',c:[38,58,58]},
+    {n:'Social Democrats',c:[64,58,70]}
+  ],
+  LV: [
+    {n:'New Unity',c:[40,54,50]},
+    {n:'Harmony (Social Democrats)',c:[60,50,54]},
+    {n:'National Alliance',c:[36,28,16]},
+    {n:'Union of Greens and Farmers',c:[46,48,46]}
+  ],
+  LT: [
+    {n:'Homeland Union (Conservatives)',c:[36,48,42]},
+    {n:'Social Democrats',c:[64,56,66]},
+    {n:'Farmers and Greens Union',c:[50,46,46]},
+    {n:'Liberal Movement',c:[30,66,60]}
+  ],
+  SK: [
+    {n:'Smer (Direction)',c:[58,34,36]},
+    {n:'Progressive Slovakia',c:[46,64,66]},
+    {n:'Hlas (Voice)',c:[56,44,46]},
+    {n:'Slovak National Party (SNS)',c:[40,28,16]},
+    {n:'Slovakia (O\u013daNO)',c:[40,44,40]}
+  ],
+  SI: [
+    {n:'Freedom Movement',c:[48,60,64]},
+    {n:'SDS (Democratic Party)',c:[34,36,24]},
+    {n:'Social Democrats',c:[64,56,68]},
+    {n:'New Slovenia (Christian)',c:[42,44,36]},
+    {n:'The Left',c:[86,58,80]}
+  ],
+  HR: [
+    {n:'HDZ (Christian Democrats)',c:[40,42,34]},
+    {n:'SDP (Social Democrats)',c:[64,56,68]},
+    {n:'Homeland Movement',c:[36,28,16]},
+    {n:'Most (Bridge)',c:[40,38,28]},
+    {n:'Mo\u017eemo! (Green-Left)',c:[82,62,82]}
+  ],
+  RS: [
+    {n:'Progressive Party (SNS)',c:[42,32,30]},
+    {n:'Socialist Party (SPS)',c:[58,38,42]},
+    {n:'Serbia Against Violence',c:[46,60,64]},
+    {n:'Nationalist right',c:[38,28,16]}
+  ],
+  BG: [
+    {n:'GERB',c:[38,44,38]},
+    {n:'We Continue the Change',c:[42,62,64]},
+    {n:'Socialist Party (BSP)',c:[62,44,48]},
+    {n:'DPS (Movement for Rights)',c:[46,46,44]},
+    {n:'Revival (Vazrazhdane)',c:[40,28,14]}
+  ],
+  BY: [
+    {n:'Ruling establishment (Lukashenko)',c:[58,14,30]},
+    {n:'Democratic opposition',c:[44,66,64]}
+  ],
+  GE: [
+    {n:'Georgian Dream',c:[44,38,38]},
+    {n:'United National Movement',c:[36,52,50]},
+    {n:'Coalition for Change',c:[42,62,62]}
+  ],
+  AM: [
+    {n:'Civil Contract (Pashinyan)',c:[46,56,56]},
+    {n:'Armenia Alliance',c:[42,38,34]},
+    {n:'Prosperous Armenia',c:[40,44,40]}
+  ],
+  KZ: [
+    {n:'Amanat (ruling party)',c:[46,26,34]},
+    {n:'Democratic reformers',c:[42,60,58]},
+    {n:'OSDP (Social Democrats)',c:[58,48,52]}
+  ],
+  MA: [
+    {n:'PJD (Islamist)',c:[48,28,16]},
+    {n:'RNI (Liberals)',c:[36,48,46]},
+    {n:'Istiqlal (Nationalist)',c:[44,40,32]},
+    {n:'USFP (Socialists)',c:[62,52,58]},
+    {n:'PAM',c:[40,46,44]}
+  ],
+  DZ: [
+    {n:'FLN (National Liberation)',c:[52,32,36]},
+    {n:'RND',c:[44,36,36]},
+    {n:'MSP (Islamist)',c:[48,26,14]},
+    {n:'Socialist Forces (FFS)',c:[64,54,60]}
+  ],
+  TN: [
+    {n:'Ennahda (Islamist)',c:[48,32,16]},
+    {n:'Free Destourian Party',c:[38,40,34]},
+    {n:'Democratic Current',c:[56,58,62]},
+    {n:'Workers\u2019 Party (Left)',c:[80,54,70]}
+  ],
+  KE: [
+    {n:'UDA (United Democratic Alliance)',c:[42,44,38]},
+    {n:'ODM / Azimio',c:[56,50,52]},
+    {n:'Jubilee',c:[44,44,40]},
+    {n:'Wiper',c:[48,46,44]}
+  ],
+  ET: [
+    {n:'Prosperity Party',c:[50,34,42]},
+    {n:'Citizens for Social Justice',c:[48,52,52]},
+    {n:'TPLF',c:[58,38,44]}
+  ],
+  GH: [
+    {n:'New Patriotic Party (NPP)',c:[38,50,44]},
+    {n:'National Democratic Congress (NDC)',c:[58,50,54]},
+    {n:'Convention People\u2019s Party (CPP)',c:[72,50,60]}
+  ],
+  NP: [
+    {n:'Nepali Congress',c:[50,54,56]},
+    {n:'CPN-UML (Communists)',c:[78,42,58]},
+    {n:'Maoist Centre',c:[86,40,60]},
+    {n:'Rastriya Swatantra Party',c:[44,58,60]},
+    {n:'RPP (Monarchist / Hindu)',c:[36,32,18]}
+  ],
+  LK: [
+    {n:'NPP / JVP (Left)',c:[80,52,66]},
+    {n:'Samagi Jana Balawegaya (SJB)',c:[46,52,54]},
+    {n:'SLPP (Rajapaksa)',c:[42,34,26]},
+    {n:'United National Party (UNP)',c:[38,50,48]}
+  ],
+  MM: [
+    {n:'National League for Democracy',c:[50,58,60]},
+    {n:'Military / USDP',c:[34,14,18]},
+    {n:'Ethnic federal parties',c:[56,54,56]}
+  ],
+  MN: [
+    {n:'Mongolian People\u2019s Party',c:[56,48,50]},
+    {n:'Democratic Party',c:[38,54,50]},
+    {n:'HUN Party',c:[48,52,52]}
+  ],
+  KH: [
+    {n:'Cambodian People\u2019s Party',c:[46,24,30]},
+    {n:'Candlelight Party (opposition)',c:[48,58,58]}
+  ],
+  QA: [
+    {n:'Ruling establishment (monarchy)',c:[40,18,20]},
+    {n:'Modernisers',c:[36,50,50]},
+    {n:'Conservatives',c:[48,16,10]}
+  ],
+  KW: [
+    {n:'Islamist bloc',c:[48,28,14]},
+    {n:'Liberal bloc',c:[36,56,56]},
+    {n:'Populist / opposition',c:[56,48,50]},
+    {n:'Tribal conservatives',c:[42,34,24]}
+  ],
+  JO: [
+    {n:'Islamic Action Front (Islamist)',c:[48,30,16]},
+    {n:'Pro-government / centrist',c:[40,40,38]},
+    {n:'Leftist / nationalist',c:[62,48,52]}
+  ],
+  LB: [
+    {n:'Hezbollah',c:[56,26,22]},
+    {n:'Free Patriotic Movement',c:[44,42,38]},
+    {n:'Lebanese Forces',c:[34,42,34]},
+    {n:'Future Movement',c:[40,46,42]},
+    {n:'Change / reformists',c:[48,62,64]}
+  ],
   DEFAULT: [
     {n:'Communist / Far-Left',c:[92,40,72]},
     {n:'Social-Democratic / Labour',c:[68,60,68]},
@@ -587,6 +1114,7 @@ const PARTIES = {
 /* ============ Countries ============ */
 /* t:1 => has a tailored question set. Flags are generated at runtime from the code. */
 function flagOf(cc){
+  if(cc==='XX')return '\uD83C\uDF10';
   const base='A'.charCodeAt(0);
   return cc.toUpperCase().split('').map(function(ch){return String.fromCodePoint(0x1F1E6 + ch.charCodeAt(0) - base);}).join('');
 }
@@ -640,7 +1168,102 @@ const COUNTRIES = [
   {c:'TH',n:'Thailand'},
   {c:'VN',n:'Vietnam'},
   {c:'SG',n:'Singapore'},
-  {c:'MY',n:'Malaysia'}
+  {c:'MY',n:'Malaysia'},
+  {c:'IR',n:'Iran'},
+  {c:'IQ',n:'Iraq'},
+  {c:'TW',n:'Taiwan'},
+  {c:'PE',n:'Peru'},
+  {c:'VE',n:'Venezuela'},
+  {c:'CU',n:'Cuba'},
+  {c:'BO',n:'Bolivia'},
+  {c:'UY',n:'Uruguay'},
+  {c:'EC',n:'Ecuador'},
+  {c:'GT',n:'Guatemala'},
+  {c:'CR',n:'Costa Rica'},
+  {c:'IS',n:'Iceland'},
+  {c:'LU',n:'Luxembourg'},
+  {c:'EE',n:'Estonia'},
+  {c:'LV',n:'Latvia'},
+  {c:'LT',n:'Lithuania'},
+  {c:'SK',n:'Slovakia'},
+  {c:'SI',n:'Slovenia'},
+  {c:'HR',n:'Croatia'},
+  {c:'RS',n:'Serbia'},
+  {c:'BG',n:'Bulgaria'},
+  {c:'BY',n:'Belarus'},
+  {c:'GE',n:'Georgia'},
+  {c:'AM',n:'Armenia'},
+  {c:'KZ',n:'Kazakhstan'},
+  {c:'MA',n:'Morocco'},
+  {c:'DZ',n:'Algeria'},
+  {c:'TN',n:'Tunisia'},
+  {c:'KE',n:'Kenya'},
+  {c:'ET',n:'Ethiopia'},
+  {c:'GH',n:'Ghana'},
+  {c:'NP',n:'Nepal'},
+  {c:'LK',n:'Sri Lanka'},
+  {c:'MM',n:'Myanmar'},
+  {c:'MN',n:'Mongolia'},
+  {c:'KH',n:'Cambodia'},
+  {c:'QA',n:'Qatar'},
+  {c:'KW',n:'Kuwait'},
+  {c:'JO',n:'Jordan'},
+  {c:'LB',n:'Lebanon'}
 ];
 
-if (typeof module !== 'undefined') { module.exports = { AXES, GENERAL, COUNTRY_Q, IDEOLOGIES, PARTIES, COUNTRIES, flagOf }; }
+/* ============ Political figures ============ */
+/* c: 0-100 on all 14 axes in AXES order. s:1 => historical figure, shown for educational comparison only. */
+const FIGURES = [
+  {n:'Bernie Sanders',cc:'US',r:'US Senator, democratic socialist',c:[88,78,82,82,66,55,82,72,60,74,70,92,76,80]},
+  {n:'Alexandria Ocasio-Cortez',cc:'US',r:'US Representative, progressive',c:[85,80,84,90,72,52,88,74,58,74,66,88,82,80]},
+  {n:'Barack Obama',cc:'US',r:'44th US President',c:[62,64,82,78,70,48,66,58,80,52,44,70,68,62]},
+  {n:'Joe Biden',cc:'US',r:'46th US President',c:[60,58,80,68,62,45,62,55,80,46,42,68,62,58]},
+  {n:'Donald Trump',cc:'US',r:'45th & 47th US President',c:[30,32,42,20,10,45,22,32,50,26,28,35,10,22]},
+  {n:'Ronald Reagan',cc:'US',r:'40th US President',c:[24,45,68,30,45,55,32,32,68,26,20,28,45,30]},
+  {n:'Ron Paul',cc:'US',r:'US libertarian congressman',c:[20,90,72,45,50,80,35,45,60,70,15,15,45,60]},
+  {n:'Franklin D. Roosevelt',cc:'US',r:'32nd US President, New Deal',c:[70,55,75,64,60,35,55,50,70,40,45,85,60,55]},
+  {n:'Jeremy Corbyn',cc:'GB',r:'Former UK Labour leader',c:[88,68,80,80,72,55,80,72,55,80,70,90,80,78]},
+  {n:'Keir Starmer',cc:'GB',r:'UK Prime Minister',c:[62,58,80,66,62,45,62,60,80,46,44,70,60,58]},
+  {n:'Tony Blair',cc:'GB',r:'Former UK PM, New Labour',c:[52,55,78,68,72,42,55,55,82,36,38,62,66,52]},
+  {n:'Margaret Thatcher',cc:'GB',r:'Former UK PM, conservative',c:[20,45,70,28,45,50,30,42,72,26,15,25,40,28]},
+  {n:'Winston Churchill',cc:'GB',r:'Wartime UK Prime Minister',c:[32,45,68,25,40,45,35,45,65,20,25,35,35,25]},
+  {n:'Nigel Farage',cc:'GB',r:'Reform UK leader',c:[32,40,50,20,8,50,25,45,50,32,28,38,8,25]},
+  {n:'Jacinda Ardern',cc:'NZ',r:'Former NZ Prime Minister',c:[68,68,84,85,72,50,78,66,72,76,50,82,80,78]},
+  {n:'Justin Trudeau',cc:'CA',r:'Former Canadian PM',c:[60,62,80,82,72,48,70,62,78,52,45,72,78,65]},
+  {n:'Emmanuel Macron',cc:'FR',r:'President of France',c:[42,58,76,66,78,42,58,60,78,46,35,58,66,55]},
+  {n:'Marine Le Pen',cc:'FR',r:'French national-populist',c:[40,32,48,25,10,45,30,35,50,32,35,50,8,25]},
+  {n:'Jean-Luc M\u00e9lenchon',cc:'FR',r:'French left leader',c:[88,60,72,78,60,52,80,70,45,72,70,88,72,72]},
+  {n:'Charles de Gaulle',cc:'FR',r:'French wartime leader & president',c:[42,40,62,35,20,40,40,35,60,26,35,50,35,30]},
+  {n:'Angela Merkel',cc:'DE',r:'Former German Chancellor',c:[42,55,80,60,75,45,58,50,82,52,38,60,68,55]},
+  {n:'Willy Brandt',cc:'DE',r:'Former West German Chancellor',c:[68,60,80,70,72,48,60,55,72,55,50,85,68,60]},
+  {n:'Karl Marx',cc:'DE',r:'Philosopher, founder of communism',c:[96,55,60,80,88,50,55,88,8,55,98,90,80,60]},
+  {n:'Vladimir Lenin',cc:'RU',r:'Leader of the Russian Revolution',c:[95,15,20,62,66,20,45,88,6,22,97,85,68,40]},
+  {n:'Leon Trotsky',cc:'RU',r:'Bolshevik revolutionary',c:[95,42,45,75,90,40,52,86,6,40,96,88,80,62]},
+  {n:'Joseph Stalin',cc:'RU',r:'Soviet dictator',s:1,c:[90,6,4,42,32,10,28,80,20,8,95,80,42,15]},
+  {n:'Vladimir Putin',cc:'RU',r:'President of Russia',c:[35,15,25,18,12,25,28,25,55,16,30,45,20,18]},
+  {n:'Mao Zedong',cc:'CN',r:'Founder of the PRC',s:1,c:[94,15,15,52,48,38,38,80,4,15,96,80,52,25]},
+  {n:'Xi Jinping',cc:'CN',r:'Leader of China',c:[55,10,15,30,30,20,40,75,45,20,70,65,35,20]},
+  {n:'Fidel Castro',cc:'CU',r:'Cuban revolutionary leader',c:[92,22,25,55,45,30,50,78,10,26,95,85,55,30]},
+  {n:'Che Guevara',cc:'AR',r:'Marxist revolutionary',c:[94,45,40,70,72,45,55,80,4,20,96,85,70,35]},
+  {n:'Hugo Ch\u00e1vez',cc:'VE',r:'President of Venezuela',c:[88,35,45,60,45,40,52,55,25,36,88,88,60,40]},
+  {n:'Salvador Allende',cc:'CL',r:'Socialist president of Chile',c:[88,60,78,72,60,50,60,60,50,66,80,88,65,60]},
+  {n:'Augusto Pinochet',cc:'CL',r:'Chilean military dictator',s:1,c:[18,10,15,15,30,35,28,25,45,15,12,20,30,15]},
+  {n:'Lula da Silva',cc:'BR',r:'President of Brazil',c:[76,58,78,70,62,48,62,50,60,58,58,85,68,62]},
+  {n:'Jair Bolsonaro',cc:'BR',r:'Former Brazilian president',c:[28,28,45,15,15,45,20,22,55,20,25,32,20,18]},
+  {n:'Javier Milei',cc:'AR',r:'Libertarian president of Argentina',c:[12,80,68,40,55,70,20,35,55,55,8,10,50,45]},
+  {n:'Nelson Mandela',cc:'ZA',r:'Anti-apartheid leader & president',c:[72,68,82,80,72,52,62,60,55,60,60,82,80,70]},
+  {n:'Mahatma Gandhi',cc:'IN',r:'Leader of Indian independence',c:[72,70,78,55,55,78,72,35,45,92,65,72,72,70]},
+  {n:'Jawaharlal Nehru',cc:'IN',r:'First PM of India',c:[72,60,78,70,68,45,58,55,65,55,60,80,70,60]},
+  {n:'Narendra Modi',cc:'IN',r:'PM of India, Hindu nationalist',c:[38,32,50,18,15,40,32,15,55,26,30,45,15,22]},
+  {n:'Recep Tayyip Erdo\u011fan',cc:'TR',r:'President of Turkey',c:[45,20,35,15,20,35,32,10,50,26,40,58,20,20]},
+  {n:'Ruhollah Khomeini',cc:'IR',r:'Founder of the Islamic Republic',s:1,c:[55,6,12,6,18,30,32,3,25,20,48,62,15,8]},
+  {n:'Viktor Orb\u00e1n',cc:'HU',r:'Prime Minister of Hungary',c:[38,25,40,18,12,40,30,28,55,30,32,45,10,22]},
+  {n:'Giorgia Meloni',cc:'IT',r:'Prime Minister of Italy',c:[36,32,55,20,15,42,30,25,58,30,30,42,12,25]},
+  {n:'Benito Mussolini',cc:'IT',r:'Italian Fascist dictator',s:1,c:[36,6,6,20,10,18,30,30,25,8,38,48,10,8]},
+  {n:'Adolf Hitler',cc:'DE',r:'Nazi dictator of Germany',s:1,c:[35,3,3,12,4,12,28,40,20,3,35,48,3,4]},
+  {n:'Francisco Franco',cc:'ES',r:'Spanish dictator',s:1,c:[38,8,8,10,15,25,30,8,30,15,38,48,12,12]},
+  {n:'Pope Francis',cc:'AR',r:'Head of the Catholic Church',c:[68,55,70,45,72,55,72,15,55,80,60,80,80,72]},
+  {n:'Volodymyr Zelensky',cc:'UA',r:'President of Ukraine',c:[48,58,75,60,60,45,50,55,70,32,40,62,60,55]}
+];
+
+if (typeof module !== 'undefined') { module.exports = { AXES, GENERAL, COUNTRY_Q, IDEOLOGIES, PARTIES, COUNTRIES, FIGURES, flagOf }; }
